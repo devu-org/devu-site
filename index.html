@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devu</title>
+    <meta name="description" content="An open-source, project-based learning platform designed to teach developers real-world skills through hands-on projects and peer feedback.">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', 'Space Mono', monospace;
+            background: #0a0a0a;
+            color: #00ff00;
+            line-height: 1.6;
+        }
+        
+        .logo-font {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: #00ff00;
+        }
+        
+        .terminal-border {
+            border: 1px solid #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+        }
+        
+        .flicker {
+            animation: flicker 2s infinite;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .scan-line {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .scan-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+        
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid #00ff00;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #00ff00; }
+        }
+        
+        a {
+            transition: all 0.3s;
+        }
+        
+        a:hover {
+            text-shadow: 0 0 5px #00ff00;
+        }
+        
+        .command-prompt::before {
+            content: '$ ';
+            color: #00ff00;
+        }
+        
+        .section-divider {
+            border-top: 1px solid #00ff00;
+            margin: 4rem 0;
+            position: relative;
+        }
+        
+        .section-divider::before,
+        .section-divider::after {
+            content: '//';
+            position: absolute;
+            top: -12px;
+            background: #0a0a0a;
+            padding: 0 10px;
+            color: #00ff00;
+        }
+        
+        .section-divider::before {
+            left: 0;
+        }
+        
+        .section-divider::after {
+            right: 0;
+        }
+        
+        .code-block {
+            background: #000;
+            border: 1px solid #00ff00;
+            padding: 1rem;
+            overflow-x: auto;
+            font-size: 0.875rem;
+        }
+        
+        .file-tree {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.8;
+        }
+        
+        .cli-command {
+            color: #00ff00;
+        }
+        
+        .cli-output {
+            color: #00ff88;
+        }
+    </style>
+</head>
+<body class="bg-black text-green-400">
+    <!-- Navigation -->
+    <nav class="terminal-border bg-black sticky top-0 z-50 border-b-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="logo-font text-2xl sm:text-3xl">DEVU</h1>
+                </div>
+                <div class="hidden md:flex space-x-6 text-sm">
+                    <a href="#features" class="hover:text-green-300">[features]</a>
+                    <a href="#mission" class="hover:text-green-300">[mission]</a>
+                    <a href="#how-it-works" class="hover:text-green-300">[how]</a>
+                    <a href="#get-started" class="hover:text-green-300">[start]</a>
+                </div>
+                <a href="https://github.com" target="_blank" class="px-4 py-2 terminal-border text-sm hover:bg-green-900/20">
+                    &gt; github
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden py-20 md:py-32 scan-line">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="mb-12 flex justify-center">
+                    <h1 class="logo-font text-5xl md:text-7xl lg:text-8xl text-green-400">DEVU</h1>
+                </div>
+                <h2 class="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 glow-text flicker">
+                    &gt; The Open-Source Developer University
+                </h2>
+                <div class="max-w-4xl mx-auto mt-8 mb-12">
+                    <p class="text-lg md:text-xl text-green-300 mb-4 command-prompt">
+                        An open-source, project-based learning platform designed to teach developers real-world skills.
+                    </p>
+                    <p class="text-base md:text-lg text-green-400/80">
+                        Unlike traditional tutorials or CS degrees that focus on theory, Devu focuses on hands-on projects, 
+                        peer feedback, and practical engineering experience.
+                    </p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+                    <a href="#get-started" class="px-8 py-4 terminal-border bg-green-900/20 text-green-400 hover:bg-green-900/40 hover:glow-text">
+                        &gt; get_started()
+                    </a>
+                    <a href="https://github.com" target="_blank" class="px-8 py-4 terminal-border border-green-500/50 text-green-300 hover:border-green-400">
+                        &gt; view_on_github()
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Mission Section -->
+    <section id="mission" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="terminal-border p-8 md:p-12">
+                <div class="mb-8">
+                    <pre class="text-green-400 text-sm mb-4">// mission.statement</pre>
+                    <h2 class="text-3xl md:text-5xl font-bold mb-6 glow-text">
+                        &gt; Build real developers, not vibe coders.
+                    </h2>
+                </div>
+                <div class="max-w-4xl">
+                    <pre class="text-green-300/80 text-sm md:text-base whitespace-pre-wrap font-mono">We believe that the best way to learn development is by doing. 
+Devu provides a structured path through real-world projects, 
+where you'll build actual applications, receive peer feedback, 
+and gain the practical engineering experience that employers value.
+
+<span class="text-green-400">// No theory. Just code.</span></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center">
+                <pre class="text-green-400 text-sm mb-4">// why.devu</pre>
+                <h2 class="text-3xl md:text-5xl font-bold glow-text">
+                    &gt; What makes us different
+                </h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="terminal-border p-6 hover:bg-green-900/10 transition">
+                    <pre class="text-green-400 text-xs mb-4">[01]</pre>
+                    <h3 class="text-xl font-bold mb-4 text-green-300">
+                        &gt; Project-Based Learning
+                    </h3>
+                    <pre class="text-green-400/70 text-sm whitespace-pre-wrap font-mono">Learn by building real applications, 
+not just following tutorials. 
+Every project is designed to teach 
+practical skills you'll use in your career.</pre>
+                </div>
+                <div class="terminal-border p-6 hover:bg-green-900/10 transition">
+                    <pre class="text-green-400 text-xs mb-4">[02]</pre>
+                    <h3 class="text-xl font-bold mb-4 text-green-300">
+                        &gt; Peer Feedback
+                    </h3>
+                    <pre class="text-green-400/70 text-sm whitespace-pre-wrap font-mono">Get constructive feedback from 
+fellow developers. Learn to review 
+code, give helpful critiques, and 
+improve through collaboration.</pre>
+                </div>
+                <div class="terminal-border p-6 hover:bg-green-900/10 transition">
+                    <pre class="text-green-400 text-xs mb-4">[03]</pre>
+                    <h3 class="text-xl font-bold mb-4 text-green-300">
+                        &gt; Practical Experience
+                    </h3>
+                    <pre class="text-green-400/70 text-sm whitespace-pre-wrap font-mono">Gain the engineering experience 
+that matters. Work on projects that 
+mirror real-world scenarios and build 
+a portfolio that demonstrates your skills.</pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- How Devu Works Section -->
+    <section id="how-it-works" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl md:text-5xl font-bold glow-text">
+                    &gt; How Devu Works
+                </h2>
+            </div>
+            
+            <div class="space-y-8">
+                <!-- Tracks -->
+                <div class="terminal-border p-6 md:p-8">
+                    <h3 class="text-xl md:text-2xl font-bold mb-4 text-green-300">
+                        &gt; Organized Learning Paths
+                    </h3>
+                    <p class="text-green-400/80 mb-4">
+                        Devu organizes learning into specialized tracks. Each track contains multiple real-world projects designed to build expertise in that domain.
+                    </p>
+                    <div class="code-block mt-4">
+                        <pre class="file-tree text-green-400">tracks/
+├── backend-engineering/
+│   ├── build-http-server/
+│   └── database-api/
+├── frontend-engineering/
+│   ├── react-dashboard/
+│   └── ui-components/
+└── low-level-systems/
+    └── memory-allocator/</pre>
+                    </div>
+                </div>
+
+                <!-- Projects Structure -->
+                <div class="terminal-border p-6 md:p-8">
+                    <h3 class="text-xl md:text-2xl font-bold mb-4 text-green-300">
+                        &gt; Every Project Includes
+                    </h3>
+                    <div class="code-block mt-4">
+                        <pre class="file-tree text-green-400">project-name/
+├── README.md          
+├── starter/           
+├── tests/             
+├── solutions/         
+└── devu.json         </pre>
+                    </div>
+                    <div class="mt-4 space-y-2 text-sm text-green-400/70">
+                        <p><span class="text-green-400">README.md</span> — Your assignment and learning objectives</p>
+                        <p><span class="text-green-400">starter/</span> — Initial codebase to build upon</p>
+                        <p><span class="text-green-400">tests/</span> — Automated tests to validate your work</p>
+                        <p><span class="text-green-400">solutions/</span> — Reference implementation (optional)</p>
+                        <p><span class="text-green-400">devu.json</span> — Project metadata for the CLI</p>
+                    </div>
+                </div>
+
+                <!-- CLI -->
+                <div class="terminal-border p-6 md:p-8">
+                    <h3 class="text-xl md:text-2xl font-bold mb-4 text-green-300">
+                        &gt; Devu Student Portal (CLI)
+                    </h3>
+                    <p class="text-green-400/80 mb-4">
+                        The Devu CLI is your command center for managing projects, running tests, and submitting your work.
+                    </p>
+                    <div class="code-block mt-4">
+                        <pre class="text-green-400"><span class="cli-command">$ devu init &lt;project-name&gt;</span>
+<span class="cli-output">✓ Copied starter code to workspace</span>
+
+<span class="cli-command">$ devu test</span>
+<span class="cli-output">Running tests...
+✓ All tests passed (12/12)</span>
+
+<span class="cli-command">$ devu submit</span>
+<span class="cli-output">✓ Created pull request #42</span></pre>
+                    </div>
+                </div>
+
+                <!-- Peer Review -->
+                <div class="terminal-border p-6 md:p-8">
+                    <h3 class="text-xl md:text-2xl font-bold mb-4 text-green-300">
+                        &gt; Peer Review System
+                    </h3>
+                    <p class="text-green-400/80">
+                        Submissions are visible as Pull Requests in the Devu repository. Contributors review and leave feedback, 
+                        helping everyone improve through collaborative learning.
+                    </p>
+                    <div class="code-block mt-4">
+                        <pre class="text-green-400"><span class="cli-command">$ devu submit</span>
+<span class="cli-output">Creating pull request...
+→ https://github.com/DEVU-ORG/DEVU/pull/42
+
+Waiting for peer review...
+✓ Review received from @developer123
+  "Great implementation! Consider adding error handling here."</span></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Get Started Section -->
+    <section id="get-started" class="py-20">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl md:text-5xl font-bold glow-text">
+                    &gt; Getting Started
+                </h2>
+            </div>
+
+            
+            
+            <div class="terminal-border p-8 md:p-12">
+                <div class="space-y-6">
+                    
+                    
+                    <div class="text-center space-y-6">
+                        <p class="text-lg md:text-xl text-green-300 leading-relaxed">
+                            Devu is just <span class="text-green-400 font-bold">getting started</span>. 
+                            We're building something special, but we're not there yet
+
+                        </p>
+                        
+                        <div class="terminal-border p-6 bg-green-900/10 max-w-3xl mx-auto">
+                            <p class="text-green-400/90 text-base md:text-lg leading-relaxed">
+                                Every contribution—whether it's code, documentation, feedback, or spreading the word,
+                                <span class="text-green-300 font-semibold">accelerates the entire process</span>.
+                            </p>
+                            <p class="text-green-400/80 text-sm md:text-base mt-4">
+                                Together, we can build the developer university the community deserves.
+                            </p>
+                        </div>
+                        
+                        <div class="pt-6">
+                            <p class="text-2xl md:text-3xl font-bold text-green-400 glow-text mb-8">
+                                Thank You !
+                            </p>
+                            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                                <a href="https://github.com/devu-org/devu?tab=readme-ov-file" target="_blank" class="px-8 py-4 terminal-border bg-green-900/20 text-green-400 hover:bg-green-900/40 hover:glow-text">
+                                    &gt; view_on_github()
+                                </a>
+                                <a href="https://github.com/devu-org/devu" target="_blank" class="px-8 py-4 terminal-border border-green-500/50 text-green-300 hover:border-green-400">
+                                    &gt; contribute()
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-green-500/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <pre class="text-green-400 text-xs mb-4">[devu]</pre>
+                    <pre class="text-green-400/70 text-xs whitespace-pre-wrap font-mono">The Open-Source Developer University. 
+Building real developers through 
+project-based learning.</pre>
+                </div>
+                <div>
+                    <pre class="text-green-400 text-xs mb-4">[resources]</pre>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-green-400/70 hover:text-green-300">&gt; documentation</a></li>
+                        <li><a href="#" class="text-green-400/70 hover:text-green-300">&gt; github</a></li>
+                        <li><a href="#" class="text-green-400/70 hover:text-green-300">&gt; community</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <pre class="text-green-400 text-xs mb-4">[open_source]</pre>
+                    <pre class="text-green-400/70 text-xs whitespace-pre-wrap font-mono">Devu is open source and 
+community-driven. 
+Contributions welcome!</pre>
+                </div>
+            </div>
+            <div class="border-t border-green-500/30 pt-8 text-center">
+                <pre class="text-green-400/50 text-xs">// © 2024 Devu. Open source and free for everyone.</pre>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
